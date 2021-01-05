@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/vega/Documents/GitHub/Parallel-Computing-Practice/Parellel_Program_CPU/ImageIO.c
+ImageIO.h
+/Users/vega/Documents/GitHub/Parallel-Computing-Practice/Parellel_Program_CPU/ImageIO.h
+
+/Users/vega/Documents/GitHub/Parallel-Computing-Practice/Parellel_Program_CPU/ImageIO.h
+stdlib.h
+-
+stdio.h
+-
+time.h
+-
+string.h
+-
+
+/Users/vega/Documents/GitHub/Parallel-Computing-Practice/Parellel_Program_CPU/ImageProcessing.c
+ImageProcessing.h
+/Users/vega/Documents/GitHub/Parallel-Computing-Practice/Parellel_Program_CPU/ImageProcessing.h
+
+/Users/vega/Documents/GitHub/Parallel-Computing-Practice/Parellel_Program_CPU/ImageProcessing.h
+ImageIO.h
+/Users/vega/Documents/GitHub/Parallel-Computing-Practice/Parellel_Program_CPU/ImageIO.h
+
+/Users/vega/Documents/GitHub/Parallel-Computing-Practice/Parellel_Program_CPU/main.c
+stdio.h
+-
+stdio.h
+-
+sys/time.h
+-
+pthread.h
+-
+ImageProcessing.h
+/Users/vega/Documents/GitHub/Parallel-Computing-Practice/Parellel_Program_CPU/ImageProcessing.h
+
