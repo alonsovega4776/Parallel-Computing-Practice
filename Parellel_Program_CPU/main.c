@@ -13,7 +13,7 @@ int main(int argc, char** argv)
 {
     char             Flip;
     int              a,i,ThErr;
-    struct TimeValue t_struct;
+    struct timeval   t_struct;
     double           t_1, t_2, dura;
 
     int            ThParameters[MAXTHREADS];
@@ -23,11 +23,11 @@ int main(int argc, char** argv)
 
     switch (argc)
     {
-        case 3: ThNumber=1;             Flip='V';                 break;
+        case 3: ThNumber=1;             Flip='V';                     break;
         case 4: ThNumber=1;             Flip=toupper(argv[3][0]); break;
         case 5: ThNumber=atoi(argv[4]); Flip=toupper(argv[3][0]); break;
-        default: printf("Usage: imflipP input output [v/h] [threads]");
-                 printf("Example: imflipP infile.bmp out.bmp h 8\n\n");
+        default: printf("Usage: main input_File output_File [V/H] [number_of_threads] \n");
+                 printf("Example: imflipP infile.bmp out.bmp H 8\n\n");
                  return 0;
     }
     if ((Flip != 'V') && (Flip != 'H'))
@@ -56,7 +56,7 @@ int main(int argc, char** argv)
     image = ReadBMP(argv[1]);
 
     gettimeofday(&t_struct, NULL);
-    t_1 = (double)t_struct.timeValue_sec*1000000.0 + ((double)t_struct.timeValue_usec);
+    t_1 = (double)t_struct.tv_sec*1000000.0 + ((double)t_struct.tv_usec);
 
     if (ThNumber > 1)
     {
@@ -87,7 +87,7 @@ int main(int argc, char** argv)
     }
 
     gettimeofday(&t_struct, NULL);
-    t_2  = (double)t_struct.timeValue_sec*1000000.0 + ((double)t_struct.timeValue_usec);
+    t_2  = (double)t_struct.tv_sec*1000000.0 + ((double)t_struct.tv_usec);
     dura = (t_2 - t_1)/1000.00;
     dura /= (double)REPS;
 
