@@ -18,6 +18,7 @@ unsigned char** CreateBlankBMP(unsigned char FILL)
 }
 //-------------------------------------------Blank BMP File---------------------------------------------------
 
+
 //-------------------------------------------Read BMP File---------------------------------------------------
 unsigned char** ReadBMP(char* fileName)
 {
@@ -45,7 +46,6 @@ unsigned char** ReadBMP(char* fileName)
 
     printf("\nInput BMP File name: %20s  (%u x %u)", fileName, image_property.Hpixels, image_property.Vpixels);
 
-
     unsigned char **image = (unsigned char*)malloc(h * sizeof(unsigned char*));
     LOOP(i,0,h) image[i] = (unsigned char*)malloc(row_bytes * sizeof(unsigned char));
     LOOP(i,0,h) fread(image[i], sizeof(unsigned char), row_bytes, f);
@@ -54,6 +54,7 @@ unsigned char** ReadBMP(char* fileName)
     return image;
 }
 //-------------------------------------------Read BMP File---------------------------------------------------
+
 
 //-------------------------------------------Write BMP File---------------------------------------------------
 void WriteBMP(unsigned char** image, char* fileName)

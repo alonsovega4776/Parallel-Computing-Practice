@@ -1,14 +1,12 @@
 #include <stdio.h>
 #include <stdio.h>
 #include <sys/time.h>
-#include <pthread.h>
+#include <ctype.h>
 
 #include "ImageProcessing.h"
 
 #define MAXTHREADS 128
 #define REPS       129
-
-
 
 
 int main(int argc, char** argv)
@@ -18,11 +16,9 @@ int main(int argc, char** argv)
     struct TimeValue t_struct;
     double           t_1, t_2, dura;
 
-    long           ThNumber;
     int            ThParameters[MAXTHREADS];
     pthread_t      ThHandle[MAXTHREADS];
     pthread_attr_t ThAttribute;
-
 
 
     switch (argc)
@@ -74,7 +70,7 @@ int main(int argc, char** argv)
                 ThParameters[i] = i;
                 ThErr = pthread_create(&ThHandle[i],
                                        &ThAttribute, MT_flip_function,
-                                       (void *) &ThParameters[i]);
+                                       (void *)&ThParameters[i]);
                 if (ThErr != 0)
                 {
                     printf("Create Error %d. Exiting abruptly...\n", ThErr);

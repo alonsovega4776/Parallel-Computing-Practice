@@ -38,6 +38,8 @@ unsigned char** CreateBlankBMP(unsigned char FILL);
 unsigned char** ReadBMP(char* fileName);
 void WriteBMP(unsigned char**, char*);
 
+extern long                 ThNumber;
+extern unsigned char**      image;
 extern struct ImgProperties image_property;
 
 #endif //PARELLEL_PROGRAM_CPU_IMAGEIO_H
