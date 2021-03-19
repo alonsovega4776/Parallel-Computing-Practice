@@ -5,8 +5,8 @@
 
 #include "ImageProcessing.h"
 
-#define MAXTHREADS 128
-#define REPS       129
+#define MAXTHREADS 12
+#define REPS       1
 
 
 int main(int argc, char** argv)
@@ -27,7 +27,7 @@ int main(int argc, char** argv)
         case 4: ThNumber=1;             Flip=toupper(argv[3][0]); break;
         case 5: ThNumber=atoi(argv[4]); Flip=toupper(argv[3][0]); break;
         default: printf("Usage: main input_File output_File [V/H] [number_of_threads] \n");
-                 printf("Example: imflipP infile.bmp out.bmp H 8\n\n");
+                 printf("Example: main infile.bmp out.bmp H 8\n\n");
                  return 0;
     }
     if ((Flip != 'V') && (Flip != 'H'))
@@ -44,7 +44,7 @@ int main(int argc, char** argv)
     {
         if(ThNumber != 1)
         {
-            printf("\nExecuting %u threads...\n", ThNumber);
+            printf("\nExecuting %ld threads...\n", ThNumber);
             MT_flip_function = (Flip=='V') ? MT_flip_imageV:MT_flip_imageH;
         }
         else
@@ -57,6 +57,7 @@ int main(int argc, char** argv)
 
     gettimeofday(&t_struct, NULL);
     t_1 = (double)t_struct.tv_sec*1000000.0 + ((double)t_struct.tv_usec);
+
 
     if (ThNumber > 1)
     {
@@ -73,7 +74,7 @@ int main(int argc, char** argv)
                                        (void *)&ThParameters[i]);
                 if (ThErr != 0)
                 {
-                    printf("Create Error %d. Exiting abruptly...\n", ThErr);
+                    printf("ERROR: Creating Threads Error %d. Exiting abruptly...\n", ThErr);
                     exit(EXIT_FAILURE);
                 }
             }
@@ -85,6 +86,7 @@ int main(int argc, char** argv)
     {
         LOOP(a,0,REPS) (*flip_function)(image);
     }
+
 
     gettimeofday(&t_struct, NULL);
     t_2  = (double)t_struct.tv_sec*1000000.0 + ((double)t_struct.tv_usec);

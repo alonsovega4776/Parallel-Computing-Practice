@@ -23,7 +23,7 @@ unsigned char** CreateBlankBMP(unsigned char FILL)
 unsigned char** ReadBMP(char* fileName)
 {
     int i   = 0;
-    FILE* f = fdopen(fileName, "rb");
+    FILE* f = fopen(fileName, "rb");
 
     if (f == NULL)
     {
@@ -44,7 +44,7 @@ unsigned char** ReadBMP(char* fileName)
     image_property.Hpixels = w;
     image_property.Hbytes  = row_bytes;
 
-    printf("\nInput BMP File name: %20s  (%u x %u)", fileName, image_property.Hpixels, image_property.Vpixels);
+    printf("\nInput BMP File name: %20s  (%u x %u) \n", fileName, image_property.Hpixels, image_property.Vpixels);
 
     unsigned char **image = (unsigned char**)malloc(h*sizeof(unsigned char*));
     LOOP(i,0,h) image[i] = (unsigned char*)malloc(row_bytes * sizeof(unsigned char));
@@ -66,13 +66,16 @@ void WriteBMP(unsigned char** image, char* fileName)
         exit(1);
     }
 
-    unsigned long int x_1 = 0, x_2 = 0;
-    LOOP(x_1,0,54) fputc(image_property.HeaderInfo[x_1], f);    //write header
-    LOOP(x_1, 0, image_property.Vpixels)
-        LOOP(x_2, 0, image_property.Hpixels)
+    unsigned long int x_1,x_2;
+
+    //write header
+    LOOP(x_1,0,54) fputc(image_property.HeaderInfo[x_1], f);
+    //write data
+    LOOP(x_1,0,image_property.Vpixels)
+        LOOP(x_2,0,image_property.Hbytes)
             fputc(image[x_1][x_2], f);
 
-    printf("\nOutput BMP File name: %20s  (%u x %u)", fileName, image_property.Hpixels, image_property.Vpixels);
+    printf("\nOutput BMP File name: %20s  (%u x_1 %u)", fileName, image_property.Hpixels, image_property.Vpixels);
     fclose(f);
 }
 //-------------------------------------------Write BMP File---------------------------------------------------
